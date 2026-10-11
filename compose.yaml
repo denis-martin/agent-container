@@ -1,0 +1,16 @@
+services:
+  agent:
+    image: agent-container
+    build:
+      context: .
+      dockerfile: Containerfile
+      args:
+        USER_UID: ${USER_UID:-1000}
+        USER_GID: ${USER_GID:-1000}
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./home:/home/agent:Z
+      - ${WORKSPACE:-.}:/workspace:Z
+    environment:
+      - ANTHROPIC_API_KEY

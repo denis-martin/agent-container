@@ -1,0 +1,3 @@
+services:
+  agent:
+    userns_mode: keep-id
