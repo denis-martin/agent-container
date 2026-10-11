@@ -28,6 +28,9 @@ mkdir -p "$SCRIPT_DIR/home"
 
 COMPOSE=("$ENGINE" compose -f "$SCRIPT_DIR/compose.yaml")
 if [[ "$ENGINE" == podman ]]; then
+    if command -v podman-compose >/dev/null 2>&1; then
+        export PODMAN_COMPOSE_PROVIDER="${PODMAN_COMPOSE_PROVIDER:-podman-compose}"
+    fi
     COMPOSE+=(-f "$SCRIPT_DIR/compose.podman.yaml")
 fi
 
